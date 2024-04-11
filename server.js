@@ -3,9 +3,10 @@ const app = express();
 const port = 8000;
 const dotenv = require('dotenv').config();
 const connectDB = require('./config/db');
+const UserModel = require("./models/user.model");
 
-// connec to Mongo
-connectDB();
+// connect to MongoDB
+connectDB().then(() => console.log("connected to MDB"));
 
 // middleware
 app.use(express.json());
@@ -15,5 +16,5 @@ app.use(express.urlencoded({extended: false}));
 app.use('/user', require('./routes/user.routes'));
 
 // launch server
-app.listen(port, () => console.log("test au port" + port));
+app.listen(port, () => console.log(`Port ouvert: ${port}`));
 
